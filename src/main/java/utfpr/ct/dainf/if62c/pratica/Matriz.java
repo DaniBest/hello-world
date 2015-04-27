@@ -1,8 +1,8 @@
-package utfpr.ct.dainf.if62c.exemplos;
+package utfpr.ct.dainf.if62c.pratica;
 
 /**
  * Representa uma matriz de valores {@code double}.
- * @author Wilson Horstmeyer Bogadao <wilson@utfpr.edu.br>
+ * @author Daniel Anderson de Freitas
  */
 public class Matriz {
     
@@ -26,6 +26,14 @@ public class Matriz {
         return mat;
     }
     
+/*    public void setMatriz(double m[][]) {
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                mat[j][i] = m[i][j];
+            }
+        }
+    }
+*/    
     /**
      * Retorna a matriz transposta.
      * @return A matriz transposta.
@@ -46,7 +54,13 @@ public class Matriz {
      * @return A soma das matrizes
      */
     public Matriz soma(Matriz m) {
-        throw new UnsupportedOperationException("Soma de matrizes não implementada.");
+        Matriz soma = new Matriz(mat.length, mat[0].length);
+        for (int i=0; i<soma.mat.length; i++) {
+            for (int j=0; j<soma.mat[i].length; j++) {
+                soma.mat[i][j] = m.mat[i][j] + mat[i][j];
+            }
+        }
+        return soma;
     }
 
     /**
@@ -55,7 +69,18 @@ public class Matriz {
      * @return O produto das matrizes
      */
     public Matriz prod(Matriz m) {
-        throw new UnsupportedOperationException("Produto de matrizes não implementado.");
+        Matriz produto = new Matriz(mat.length, m.mat[0].length);
+        double soma = 0;
+        for (int i=0; i<produto.mat.length; i++) {
+            for (int j=0; j<produto.mat[i].length; j++) {
+                for (int k=0; k<mat[i].length; k++) {
+                    soma += (mat[i][k]*m.mat[k][j]);
+                }
+                produto.mat[i][j] = soma;
+                soma = 0;
+            }
+        }
+        return produto;
     }
 
     /**
